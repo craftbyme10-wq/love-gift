@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Love ❤️</title>
+
+<style>
+
+body{
+margin:0;
+background:black;
+color:white;
+font-family:Arial;
+text-align:center;
+overflow:hidden;
+}
+
+#giftScreen{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:black;
+}
+
+button{
+padding:20px 40px;
+font-size:22px;
+background:#ff4d6d;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+#mainContent{
+display:none;
+}
+
+h1{
+font-size:60px;
+color:#ff4d6d;
+}
+
+p{
+font-size:24px;
+}
+
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
+}
+
+.heart{
+position:fixed;
+top:-10px;
+font-size:24px;
+animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10px)}
+100%{transform:translateY(100vh)}
+}
+
+.firefly{
+position:fixed;
+width:4px;
+height:4px;
+background:yellow;
+border-radius:50%;
+animation:fly 6s infinite alternate;
+}
+
+@keyframes fly{
+0%{transform:translateY(0)}
+100%{transform:translateY(-200px)}
+}
+
+.slideshow{
+width:300px;
+height:300px;
+margin:auto;
+border-radius:20px;
+overflow:hidden;
+}
+
+.slideshow img{
+width:100%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="giftScreen">
+
+<h1>🎁</h1>
+
+<button onclick="openGift()">Open Your Gift</button>
+
+</div>
+
+<div id="mainContent">
+
+<h1>Hello My Love ❤️</h1>
+
+<p id="type"></p>
+
+<div class="slideshow">
+<img id="slide" src="photo1.jpg">
+</div>
+
+<h2 id="timer"></h2>
+
+<button onclick="secret()">Click for Secret</button>
+
+<h2 id="secret"></h2>
+
+</div>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function openGift(){
+
+document.getElementById("giftScreen").style.display="none";
+document.getElementById("mainContent").style.display="block";
+
+document.getElementById("music").play();
+
+typeWriter();
+
+}
+
+/* typewriter */
+
+let text="You are the most beautiful thing in my life. I made this small universe just for you ❤️";
+let i=0;
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("type").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,50);
+
+}
+
+}
+
+/* stars */
+
+for(let i=0;i<100;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(star);
+
+}
+
+/* hearts */
+
+function heart(){
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{h.remove()},6000);
+
+}
+
+setInterval(heart,400);
+
+/* fireflies */
+
+for(let i=0;i<30;i++){
+
+let f=document.createElement("div");
+
+f.className="firefly";
+
+f.style.left=Math.random()*100+"vw";
+
+f.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(f);
+
+}
+
+/* slideshow */
+
+let photos=["photo1.jpg","photo2.jpg","photo3.jpg"];
+
+let index=0;
+
+setInterval(function(){
+
+index=(index+1)%photos.length;
+
+document.getElementById("slide").src=photos[index];
+
+},3000);
+
+/* timer */
+
+let startDate=new Date("2024-01-01");
+
+function timer(){
+
+let now=new Date();
+
+let diff=now-startDate;
+
+let days=Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("timer").innerHTML="I have loved you for "+days+" days ❤️";
+
+}
+
+setInterval(timer,1000);
+
+/* secret */
+
+function secret(){
+
+document.getElementById("secret").innerHTML="Will you stay with me forever? ❤️";
+
+setTimeout(()=>{
+
+alert("You are the best thing that ever happened to me ❤️");
+
+},3000);
+
+}
+
+</script>
+
+</body>
+</html>
